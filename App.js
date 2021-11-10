@@ -3,10 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 
 import { useFonts } from 'expo-font';
-
-import {
-  MainLayout,
-} from "./screens";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 import CustomDrawer from "./navigation/CustomDrawer";
 
@@ -25,19 +23,21 @@ const App = () => {
     return null;
   }
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false
-        }}
-        initialRouteName={'Home'}
-      >
-        <Stack.Screen
-          name="Home"
-          component={CustomDrawer}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false
+          }}
+          initialRouteName={'Home'}
+        >
+          <Stack.Screen
+            name="Home"
+            component={CustomDrawer}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
 
